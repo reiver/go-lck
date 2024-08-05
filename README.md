@@ -1,6 +1,6 @@
 # go-lck
 
-Package **lck** implements an thread-safe locking-types, for the Go programming language.
+Package **lck** implements thread-safe locking-types, for the Go programming language.
 
 ## Documention
 

@@ -28,6 +28,38 @@ lockable.Set(true)
 value := lockable.Get()
 ```
 
+Here is another example  **locking-type**, where here it holds a `map`:
+
+```go
+import "github.com/reiver/go-lck"
+
+//
+
+var lockable lck.Locking[map[string]any]
+
+// ...
+
+lockable.Let(fn(m *map[string]any) {
+	if nil == *m {
+		*m = map[string]any{}
+	}
+
+	*m["something"] = 5
+})
+
+// ...
+
+var value any
+
+lockable.Let(fn(m *map[string]any) {
+	if nil == *m {
+		return
+	}
+
+	value = *m["something"]
+})
+```
+
 ## Import
 
 To import package **lck** use `import` code like the follownig:

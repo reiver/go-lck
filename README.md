@@ -10,7 +10,8 @@ Online documentation, which includes examples, can be found at: http://godoc.org
 
 ## Examples
 
-Here is an example **lckional-type** that can hold a string:
+Here is an example **locking-type** that can hold a `bool`:
+
 ```go
 import "github.com/reiver/go-lck"
 

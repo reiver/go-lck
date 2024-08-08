@@ -44,7 +44,7 @@ lockable.Let(fn(m *map[string]any) {
 		*m = map[string]any{}
 	}
 
-	*m["something"] = 5
+	(*m)["something"] = 5
 })
 
 // ...

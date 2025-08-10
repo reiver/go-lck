@@ -71,7 +71,7 @@ import "github.com/reiver/go-lck"
 
 To install package **lck** do the following:
 ```
-GOPROXY=direct go get https://github.com/reiver/go-lck
+GOPROXY=direct go get github.com/reiver/go-lck
 ```
 
 ## Author

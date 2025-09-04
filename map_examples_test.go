@@ -22,10 +22,22 @@ func ExampleMap_string_int() {
 	value, found := store.Get("twice")
 	fmt.Printf("STORE[twice]: %d, %t\n", value, found)
 
+	fmt.Println()
+	fmt.Println("KEY-VALUES:")
 	store.For(func(key string, value int){
 		fmt.Println()
-		fmt.Printf("KEY: %q\n", key)
-		fmt.Printf("VALUE: %d\n", value)
+		fmt.Printf("- KEY: %q\n", key)
+		fmt.Printf("- VALUE: %d\n", value)
+	})
+
+	store.Unset("twice")
+
+	fmt.Println()
+	fmt.Println("KEY-VALUES:")
+	store.For(func(key string, value int){
+		fmt.Println()
+		fmt.Printf("- KEY: %q\n", key)
+		fmt.Printf("- VALUE: %d\n", value)
 	})
 
 	// Output:
@@ -33,16 +45,29 @@ func ExampleMap_string_int() {
 	// STORE-LEN-AFTER-SETTING: 4
 	// STORE[twice]: 2, true
 	// 
-	// KEY: "fource"
-	// VALUE: 4
+	// KEY-VALUES:
 	// 
-	// KEY: "once"
-	// VALUE: 1
+	// - KEY: "fource"
+	// - VALUE: 4
+	// 
+	// - KEY: "once"
+	// - VALUE: 1
 	//
-	// KEY: "thrice"
-	// VALUE: 3
+	// - KEY: "thrice"
+	// - VALUE: 3
 	// 
-	// KEY: "twice"
-	// VALUE: 2
+	// - KEY: "twice"
+	// - VALUE: 2
+	// 
+	// KEY-VALUES:
+	// 
+	// - KEY: "fource"
+	// - VALUE: 4
+	// 
+	// - KEY: "once"
+	// - VALUE: 1
+	//
+	// - KEY: "thrice"
+	// - VALUE: 3
 
 }

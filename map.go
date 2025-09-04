@@ -82,3 +82,18 @@ func (receiver *Map[K,V]) Set(key K, value V) {
 
 	receiver.data[key] = value
 }
+
+func (receiver *Map[K,V]) Unset(key K) {
+	if nil == receiver {
+		return
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	if len(receiver.data) <= 0 {
+		return
+	}
+
+	delete(receiver.data, key)
+}

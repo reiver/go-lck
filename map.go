@@ -8,10 +8,10 @@ import (
 
 type Map[K cmp.Ordered, V any] struct {
 	mutex sync.Mutex
-	data map[K]V
+	data  map[K]V
 }
 
-func (receiver *Map[K,V]) For(fn func(K,V)) {
+func (receiver *Map[K, V]) For(fn func(K, V)) {
 	if nil == receiver {
 		return
 	}
@@ -38,7 +38,7 @@ func (receiver *Map[K,V]) For(fn func(K,V)) {
 	}
 }
 
-func (receiver *Map[K,V]) Get(key K) (V, bool) {
+func (receiver *Map[K, V]) Get(key K) (V, bool) {
 	var nada V
 
 	if nil == receiver {
@@ -60,7 +60,7 @@ func (receiver *Map[K,V]) Get(key K) (V, bool) {
 	return value, true
 }
 
-func (receiver *Map[K,V]) Len() int {
+func (receiver *Map[K, V]) Len() int {
 	if nil == receiver {
 		return 0
 	}
@@ -71,7 +71,7 @@ func (receiver *Map[K,V]) Len() int {
 	return len(receiver.data)
 }
 
-func (receiver *Map[K,V]) Set(key K, value V) {
+func (receiver *Map[K, V]) Set(key K, value V) {
 	if nil == receiver {
 		return
 	}
@@ -89,7 +89,7 @@ func (receiver *Map[K,V]) Set(key K, value V) {
 	receiver.data[key] = value
 }
 
-func (receiver *Map[K,V]) Unset(key K) {
+func (receiver *Map[K, V]) Unset(key K) {
 	if nil == receiver {
 		return
 	}

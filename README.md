@@ -17,7 +17,7 @@ import "github.com/reiver/go-lck"
 
 //
 
-var lockable lck.Locking[bool]
+var lockable lck.Lockable[bool]
 
 // ...
 
@@ -35,7 +35,7 @@ import "github.com/reiver/go-lck"
 
 //
 
-var lockable lck.Locking[map[string]any]
+var lockable lck.Lockable[map[string]any]
 
 // ...
 

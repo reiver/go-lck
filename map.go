@@ -75,6 +75,22 @@ func (receiver *Map[K, V]) Get(key K) (V, bool) {
 	return value, true
 }
 
+func (receiver *Map[K, V]) Has(key K) bool {
+	if nil == receiver {
+		return false
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	if len(receiver.data) <= 0 {
+		return false
+	}
+
+	_, found := receiver.data[key]
+	return found
+}
+
 func (receiver *Map[K, V]) Keys() []K {
 	if nil == receiver {
 		return nil

@@ -11,7 +11,7 @@ type Map[K cmp.Ordered, V any] struct {
 	data  map[K]V
 }
 
-func (receiver *Map[K, V]) Clean() {
+func (receiver *Map[K, V]) Clear() {
 	if nil == receiver {
 		return
 	}

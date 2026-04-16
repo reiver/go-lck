@@ -11,6 +11,21 @@ type Map[K cmp.Ordered, V any] struct {
 	data  map[K]V
 }
 
+func (receiver *Map[K, V]) Clean() {
+	if nil == receiver {
+		return
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	if nil == receiver.data {
+		return
+	}
+
+	clear(receiver.data)
+}
+
 func (receiver *Map[K, V]) For(fn func(K, V)) {
 	if nil == receiver {
 		return
@@ -69,6 +84,25 @@ func (receiver *Map[K, V]) Len() int {
 	defer receiver.mutex.Unlock()
 
 	return len(receiver.data)
+}
+
+func (receiver *Map[K, V]) Let(key K, fn func(V, bool) V) {
+	if nil == receiver {
+		return
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	if nil == receiver.data {
+		receiver.data = map[K]V{}
+	}
+	if nil == receiver.data {
+		return
+	}
+
+	value, found := receiver.data[key]
+	receiver.data[key] = fn(value, found)
 }
 
 func (receiver *Map[K, V]) Set(key K, value V) {

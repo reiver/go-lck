@@ -123,8 +123,8 @@ func TestRace_Lockable_LetMutationVsGet(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			for i := 0; i < raceIterations; i++ {
-				l.Let(func(p *int) {
-					*p = *p + 1
+				l.Let(func(v int) int {
+					return v + 1
 				})
 			}
 		}()

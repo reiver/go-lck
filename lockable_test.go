@@ -28,8 +28,8 @@ func TestLockable_Let_Mutates(t *testing.T) {
 	var l lck.Lockable[int]
 
 	l.Set(10)
-	l.Let(func(p *int) {
-		*p = *p + 5
+	l.Let(func(v int) int {
+		return v + 5
 	})
 
 	if got := l.Get(); got != 15 {
@@ -40,8 +40,8 @@ func TestLockable_Let_Mutates(t *testing.T) {
 func TestLockable_Let_OnZeroValue(t *testing.T) {
 	var l lck.Lockable[string]
 
-	l.Let(func(p *string) {
-		*p = "hello"
+	l.Let(func(v string) string {
+		return "hello"
 	})
 
 	if got := l.Get(); got != "hello" {
@@ -68,8 +68,9 @@ func TestLockable_NilReceiver_Let(t *testing.T) {
 	var l *lck.Lockable[int]
 
 	called := false
-	l.Let(func(p *int) {
+	l.Let(func(v int) int {
 		called = true
+		return v
 	})
 
 	if called {

@@ -11,7 +11,7 @@ import (
 //
 //	go test -race
 //
-// Runnng `go test` without the `-race` won't test thread safety.
+// Running `go test` without the `-race` won't test thread safety.
 
 const raceGoroutines = 64
 const raceIterations = 200

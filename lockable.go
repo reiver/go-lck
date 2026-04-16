@@ -17,8 +17,8 @@ func (receiver *Lockable[T]) Get() T {
 }
 
 func (receiver *Lockable[T]) Let(fn func(*T)) {
-	receiver.mutex.RLock()
-	defer receiver.mutex.RUnlock()
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
 
 	fn(&receiver.value)
 }

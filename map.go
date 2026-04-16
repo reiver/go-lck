@@ -179,17 +179,21 @@ func (receiver *Map[K, V]) Swap(key K, value V) (V, bool) {
 	return prev, found
 }
 
-func (receiver *Map[K, V]) Unset(key K) {
+func (receiver *Map[K, V]) Unset(key K) (V, bool) {
 	if nil == receiver {
-		return
+		var nada V
+		return nada, false
 	}
 
 	receiver.mutex.Lock()
 	defer receiver.mutex.Unlock()
 
 	if len(receiver.data) <= 0 {
-		return
+		var nada V
+		return nada, false
 	}
 
+	prev, found := receiver.data[key]
 	delete(receiver.data, key)
+	return prev, found
 }

@@ -75,6 +75,22 @@ func (receiver *Map[K, V]) Get(key K) (V, bool) {
 	return value, true
 }
 
+func (receiver *Map[K, V]) Keys() []K {
+	if nil == receiver {
+		return nil
+	}
+
+	var keys []K
+
+	receiver.mutex.Lock()
+	for key, _ := range receiver.data {
+		keys = append(keys, key)
+	}
+	receiver.mutex.Unlock()
+
+	return keys
+}
+
 func (receiver *Map[K, V]) Len() int {
 	if nil == receiver {
 		return 0

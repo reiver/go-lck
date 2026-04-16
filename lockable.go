@@ -10,6 +10,11 @@ type Lockable[T any] struct {
 }
 
 func (receiver *Lockable[T]) Get() T {
+	if nil == receiver {
+		var nada T
+		return nada
+	}
+
 	receiver.mutex.RLock()
 	defer receiver.mutex.RUnlock()
 
@@ -17,12 +22,20 @@ func (receiver *Lockable[T]) Get() T {
 }
 
 func (receiver *Lockable[T]) Let(fn func(*T)) {
+	if nil == receiver {
+		return
+	}
+
 	receiver.mutex.Lock()
 	defer receiver.mutex.Unlock()
 
 	fn(&receiver.value)
 }
 func (receiver *Lockable[T]) Set(value T) {
+	if nil == receiver {
+		return
+	}
+
 	receiver.mutex.Lock()
 	defer receiver.mutex.Unlock()
 

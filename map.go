@@ -80,10 +80,9 @@ func (receiver *Map[K, V]) Keys() []K {
 		return nil
 	}
 
-	var keys []K
-
 	receiver.mutex.Lock()
-	for key, _ := range receiver.data {
+	keys := make([]K, 0, len(receiver.data))
+	for key := range receiver.data {
 		keys = append(keys, key)
 	}
 	receiver.mutex.Unlock()

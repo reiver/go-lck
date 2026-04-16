@@ -8,7 +8,7 @@ import (
 
 func ExampleMap_string_int() {
 
-	var store lck.Map[string,int]
+	var store lck.Map[string, int]
 
 	fmt.Printf("INITIAL-STORE-LEN: %d\n", store.Len())
 
@@ -24,7 +24,7 @@ func ExampleMap_string_int() {
 
 	fmt.Println()
 	fmt.Println("KEY-VALUES:")
-	store.For(func(key string, value int){
+	store.For(func(key string, value int) {
 		fmt.Println()
 		fmt.Printf("- KEY: %q\n", key)
 		fmt.Printf("- VALUE: %d\n", value)
@@ -34,7 +34,7 @@ func ExampleMap_string_int() {
 
 	fmt.Println()
 	fmt.Println("KEY-VALUES:")
-	store.For(func(key string, value int){
+	store.For(func(key string, value int) {
 		fmt.Println()
 		fmt.Printf("- KEY: %q\n", key)
 		fmt.Printf("- VALUE: %d\n", value)
@@ -44,26 +44,26 @@ func ExampleMap_string_int() {
 	// INITIAL-STORE-LEN: 0
 	// STORE-LEN-AFTER-SETTING: 4
 	// STORE[twice]: 2, true
-	// 
+	//
 	// KEY-VALUES:
-	// 
+	//
 	// - KEY: "fource"
 	// - VALUE: 4
-	// 
+	//
 	// - KEY: "once"
 	// - VALUE: 1
 	//
 	// - KEY: "thrice"
 	// - VALUE: 3
-	// 
+	//
 	// - KEY: "twice"
 	// - VALUE: 2
-	// 
+	//
 	// KEY-VALUES:
-	// 
+	//
 	// - KEY: "fource"
 	// - VALUE: 4
-	// 
+	//
 	// - KEY: "once"
 	// - VALUE: 1
 	//

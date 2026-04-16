@@ -4,7 +4,7 @@ import (
 	"sync"
 )
 
-type Lockable[T any] struct {
+type Lockable[T comparable] struct {
 	value T
 	mutex sync.RWMutex
 }

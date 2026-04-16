@@ -117,9 +117,10 @@ func (receiver *Map[K, V]) Len() int {
 	return len(receiver.data)
 }
 
-func (receiver *Map[K, V]) Let(key K, fn func(V, bool) V) {
+func (receiver *Map[K, V]) Let(key K, fn func(V, bool) V) (V, bool) {
 	if nil == receiver {
-		return
+		var nada V
+		return nada, false
 	}
 
 	receiver.mutex.Lock()
@@ -129,11 +130,13 @@ func (receiver *Map[K, V]) Let(key K, fn func(V, bool) V) {
 		receiver.data = map[K]V{}
 	}
 	if nil == receiver.data {
-		return
+		var nada V
+		return nada, false
 	}
 
 	value, found := receiver.data[key]
 	receiver.data[key] = fn(value, found)
+	return value, found
 }
 
 func (receiver *Map[K, V]) Set(key K, value V) {

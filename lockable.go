@@ -21,7 +21,7 @@ func (receiver *Lockable[T]) Get() T {
 	return receiver.value
 }
 
-func (receiver *Lockable[T]) Let(fn func(*T)) {
+func (receiver *Lockable[T]) Let(fn func(T)T) {
 	if nil == receiver {
 		return
 	}
@@ -29,7 +29,7 @@ func (receiver *Lockable[T]) Let(fn func(*T)) {
 	receiver.mutex.Lock()
 	defer receiver.mutex.Unlock()
 
-	fn(&receiver.value)
+	receiver.value = fn(receiver.value)
 }
 func (receiver *Lockable[T]) Set(value T) {
 	if nil == receiver {

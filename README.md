@@ -35,29 +35,15 @@ import "github.com/reiver/go-lck"
 
 //
 
-var lockable lck.Lockable[map[string]any]
+var lockable lck.Map[string, any]
 
 // ...
 
-lockable.Let(func(m *map[string]any) {
-	if nil == *m {
-		*m = map[string]any{}
-	}
-
-	(*m)["something"] = 5
-})
+lockable.Set("something", 5)
 
 // ...
 
-var value any
-
-lockable.Let(func(m *map[string]any) {
-	if nil == *m {
-		return
-	}
-
-	value = (*m)["something"]
-})
+value, found := lockable.Get("something")
 ```
 
 ## Import

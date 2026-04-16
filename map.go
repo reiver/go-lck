@@ -154,6 +154,28 @@ func (receiver *Map[K, V]) Set(key K, value V) {
 	receiver.data[key] = value
 }
 
+func (receiver *Map[K, V]) Swap(key K, value V) (V, bool) {
+	if nil == receiver {
+		var nada V
+		return nada, false
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	if nil == receiver.data {
+		receiver.data = map[K]V{}
+	}
+	if nil == receiver.data {
+		var nada V
+		return nada, false
+	}
+
+	prev, found := receiver.data[key]
+	receiver.data[key] = value
+	return prev, found
+}
+
 func (receiver *Map[K, V]) Unset(key K) {
 	if nil == receiver {
 		return

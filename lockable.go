@@ -42,3 +42,17 @@ func (receiver *Lockable[T]) Set(value T) {
 
 	receiver.value = value
 }
+
+func (receiver *Lockable[T]) Swap(value T) T {
+	if nil == receiver {
+		var nada T
+		return nada
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	prev := receiver.value
+	receiver.value = value
+	return prev
+}

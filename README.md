@@ -48,7 +48,7 @@ value, found := lockable.Get("something")
 
 ## Import
 
-To import package **lck** use `import` code like the follownig:
+To import package **lck** use `import` code like the following:
 ```
 import "github.com/reiver/go-lck"
 ```

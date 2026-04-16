@@ -31,6 +31,7 @@ func (receiver *Lockable[T]) Let(fn func(T)T) {
 
 	receiver.value = fn(receiver.value)
 }
+
 func (receiver *Lockable[T]) Set(value T) {
 	if nil == receiver {
 		return

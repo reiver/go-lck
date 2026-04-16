@@ -39,7 +39,7 @@ var lockable lck.Lockable[map[string]any]
 
 // ...
 
-lockable.Let(fn(m *map[string]any) {
+lockable.Let(func(m *map[string]any) {
 	if nil == *m {
 		*m = map[string]any{}
 	}
@@ -51,12 +51,12 @@ lockable.Let(fn(m *map[string]any) {
 
 var value any
 
-lockable.Let(fn(m *map[string]any) {
+lockable.Let(func(m *map[string]any) {
 	if nil == *m {
 		return
 	}
 
-	value = *m["something"]
+	value = (*m)["something"]
 })
 ```
 

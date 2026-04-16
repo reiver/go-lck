@@ -16,19 +16,25 @@ func (receiver *Map[K,V]) For(fn func(K,V)) {
 		return
 	}
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
-
-	var keys []K
-	for key,_ := range receiver.data {
-		keys = append(keys, key)
+	type keyvalue struct {
+		key   K
+		value V
 	}
 
-	slices.Sort(keys)
+	var keyvalues []keyvalue
 
-	for _, key := range keys {
-		value := receiver.data[key]
-		fn(key,value)
+	receiver.mutex.Lock()
+	for key, value := range receiver.data {
+		keyvalues = append(keyvalues, keyvalue{key, value})
+	}
+	receiver.mutex.Unlock()
+
+	slices.SortFunc(keyvalues, func(a keyvalue, b keyvalue) int {
+		return cmp.Compare(a.key, b.key)
+	})
+
+	for _, kv := range keyvalues {
+		fn(kv.key, kv.value)
 	}
 }
 

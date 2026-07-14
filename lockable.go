@@ -21,7 +21,7 @@ import (
 //	• [Lockable.Let]
 //	• [Lockable.Set]
 //	• [Lockable.Swap]
-type Lockable[T comparable] struct {
+type Lockable[T any] struct {
 	value T
 	mutex sync.RWMutex
 }
